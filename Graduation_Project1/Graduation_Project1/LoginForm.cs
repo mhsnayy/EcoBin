@@ -19,15 +19,14 @@ namespace Graduation_Project1
             InitializeComponent();
         }
         DataBase db = new DataBase();
-        public bool statu=true;
-        public string city = "";//bunu yunusla bi konuşmak gerek
+        public bool statu;
         //databaseden kullanıcı girişi bilgileri sağlanacak public bir statü değerinde kullanıcının main admin kontrol edilecek
         //(TAMAMLANDI)
         private void sButtonLog_Click(object sender, EventArgs e)
         {
             string userName = txtUserName.Text.ToString();
             string password = txtPassword.Text.ToString();
-            string query = "SELECT * FROM users WHERE username = @username AND password = @password";
+            string query = "SELECT * FROM admins WHERE username = @username AND password = @password";
             
             using (var con = db.connection())
             {
@@ -35,6 +34,7 @@ namespace Graduation_Project1
                 {
                     command.Parameters.AddWithValue("@username", userName);
                     command.Parameters.AddWithValue("@password", password);
+                    
                     using(var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -42,6 +42,7 @@ namespace Graduation_Project1
                             statu = Convert.ToBoolean(reader["is_superadmin"]);
                             MessageBox.Show("Authentication successful!");
                             HomeForm hfrm = new HomeForm();
+                            hfrm._statu = statu;
                             hfrm.Show();
                             this.Hide();
                         }

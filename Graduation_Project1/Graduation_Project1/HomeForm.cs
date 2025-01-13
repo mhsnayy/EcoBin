@@ -12,6 +12,7 @@ namespace Graduation_Project1
 {
     public partial class HomeForm : Form
     {
+        public bool _statu;
         public HomeForm()
         {
             InitializeComponent();
@@ -41,7 +42,8 @@ namespace Graduation_Project1
         private void HomeForm_Load(object sender, EventArgs e)
         {
             LoginForm lfrm = new LoginForm();
-            if (lfrm.statu)
+            
+            if (_statu)
             {
                 btnEditUser.Visible = true;
                 btnEditUser.Enabled = true;

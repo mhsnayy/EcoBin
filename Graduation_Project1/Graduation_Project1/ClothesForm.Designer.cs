@@ -39,10 +39,6 @@
             this.checkShoes = new DevExpress.XtraBars.BarCheckItem();
             this.checkBlanket = new DevExpress.XtraBars.BarCheckItem();
             this.checkSweatPanth = new DevExpress.XtraBars.BarCheckItem();
-            this.cmbCity = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.cmbTown = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.barBtnList = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnBoxPage = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnHomePage = new DevExpress.XtraBars.BarButtonItem();
@@ -52,6 +48,8 @@
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemCheckedComboBoxEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.repositoryItemCheckedComboBoxEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.repositoryItemCheckedComboBoxEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
@@ -68,28 +66,32 @@
             this.txtUsability = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtColor = new DevExpress.XtraEditors.TextEdit();
+            this.txtID = new DevExpress.XtraEditors.TextEdit();
             this.txtBoxID = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblReason = new DevExpress.XtraEditors.LabelControl();
+            this.lblMaterial = new DevExpress.XtraEditors.LabelControl();
+            this.lblFabricType = new DevExpress.XtraEditors.LabelControl();
+            this.lblSize = new DevExpress.XtraEditors.LabelControl();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblUsability = new DevExpress.XtraEditors.LabelControl();
+            this.lblName = new DevExpress.XtraEditors.LabelControl();
+            this.lblId = new DevExpress.XtraEditors.LabelControl();
+            this.lblColor = new DevExpress.XtraEditors.LabelControl();
+            this.lblBoxId = new DevExpress.XtraEditors.LabelControl();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.txtID = new DevExpress.XtraEditors.TextEdit();
+            this.btnTshirt = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).BeginInit();
@@ -103,10 +105,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUsability.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -124,14 +126,16 @@
             this.checkShoes,
             this.checkBlanket,
             this.checkSweatPanth,
-            this.cmbCity,
-            this.cmbTown,
             this.barBtnList,
             this.barBtnBoxPage,
             this.barBtnHomePage,
-            this.barEditItem3});
+            this.barEditItem3,
+            this.btnTshirt,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem3});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 41;
+            this.ribbonControl1.MaxItemId = 45;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -225,34 +229,6 @@
             this.checkSweatPanth.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.checkSweatPanth.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.checkSweatPanth_CheckedChanged);
             // 
-            // cmbCity
-            // 
-            this.cmbCity.Caption = "CITY";
-            this.cmbCity.Edit = this.repositoryItemComboBox1;
-            this.cmbCity.Id = 31;
-            this.cmbCity.Name = "cmbCity";
-            // 
-            // repositoryItemComboBox1
-            // 
-            this.repositoryItemComboBox1.AutoHeight = false;
-            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
-            // 
-            // cmbTown
-            // 
-            this.cmbTown.Caption = "TOWN";
-            this.cmbTown.Edit = this.repositoryItemComboBox2;
-            this.cmbTown.Id = 32;
-            this.cmbTown.Name = "cmbTown";
-            // 
-            // repositoryItemComboBox2
-            // 
-            this.repositoryItemComboBox2.AutoHeight = false;
-            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
-            // 
             // barBtnList
             // 
             this.barBtnList.Caption = "LIST";
@@ -269,6 +245,7 @@
             this.barBtnBoxPage.ImageOptions.SvgImage = global::Graduation_Project1.Properties.Resources.boxes;
             this.barBtnBoxPage.Name = "barBtnBoxPage";
             this.barBtnBoxPage.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barBtnBoxPage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnBoxPage_ItemClick);
             // 
             // barBtnHomePage
             // 
@@ -277,6 +254,7 @@
             this.barBtnHomePage.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barBtnHomePage.ImageOptions.SvgImage")));
             this.barBtnHomePage.Name = "barBtnHomePage";
             this.barBtnHomePage.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barBtnHomePage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnHomePage_ItemClick);
             // 
             // barEditItem3
             // 
@@ -314,6 +292,10 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.checkShoes);
             this.ribbonPageGroup1.ItemLinks.Add(this.checkBlanket);
             this.ribbonPageGroup1.ItemLinks.Add(this.checkSweatPanth);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnTshirt);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem3);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "CLOTHES";
             // 
@@ -325,13 +307,25 @@
             // 
             // ribbonPageGroup7
             // 
-            this.ribbonPageGroup7.ItemLinks.Add(this.cmbCity);
-            this.ribbonPageGroup7.ItemLinks.Add(this.cmbTown);
             this.ribbonPageGroup7.ItemLinks.Add(this.barBtnList);
             this.ribbonPageGroup7.ItemLinks.Add(this.barBtnBoxPage);
             this.ribbonPageGroup7.ItemLinks.Add(this.barBtnHomePage);
             this.ribbonPageGroup7.Name = "ribbonPageGroup7";
             this.ribbonPageGroup7.Text = "OPERAIONS";
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
             // 
             // repositoryItemCheckedComboBoxEdit1
             // 
@@ -387,19 +381,19 @@
             this.groupControl1.Controls.Add(this.txtColor);
             this.groupControl1.Controls.Add(this.txtID);
             this.groupControl1.Controls.Add(this.txtBoxID);
-            this.groupControl1.Controls.Add(this.labelControl8);
-            this.groupControl1.Controls.Add(this.labelControl7);
-            this.groupControl1.Controls.Add(this.labelControl6);
-            this.groupControl1.Controls.Add(this.labelControl3);
+            this.groupControl1.Controls.Add(this.lblReason);
+            this.groupControl1.Controls.Add(this.lblMaterial);
+            this.groupControl1.Controls.Add(this.lblFabricType);
+            this.groupControl1.Controls.Add(this.lblSize);
             this.groupControl1.Controls.Add(this.btnDelete);
             this.groupControl1.Controls.Add(this.btnEdit);
             this.groupControl1.Controls.Add(this.btnAdd);
             this.groupControl1.Controls.Add(this.btnExport);
-            this.groupControl1.Controls.Add(this.labelControl5);
-            this.groupControl1.Controls.Add(this.labelControl2);
-            this.groupControl1.Controls.Add(this.labelControl9);
-            this.groupControl1.Controls.Add(this.labelControl4);
-            this.groupControl1.Controls.Add(this.labelControl1);
+            this.groupControl1.Controls.Add(this.lblUsability);
+            this.groupControl1.Controls.Add(this.lblName);
+            this.groupControl1.Controls.Add(this.lblId);
+            this.groupControl1.Controls.Add(this.lblColor);
+            this.groupControl1.Controls.Add(this.lblBoxId);
             this.groupControl1.Location = new System.Drawing.Point(976, 203);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(276, 606);
@@ -419,6 +413,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Recycle", true, null, "Recycle")});
             this.radioGroup1.Size = new System.Drawing.Size(266, 45);
             this.radioGroup1.TabIndex = 3;
+            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
             // 
             // txtReason
             // 
@@ -427,7 +422,7 @@
             this.txtReason.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtReason.Properties.Appearance.Options.UseFont = true;
             this.txtReason.Size = new System.Drawing.Size(100, 26);
-            this.txtReason.TabIndex = 2;
+            this.txtReason.TabIndex = 8;
             // 
             // txtMaterial
             // 
@@ -436,7 +431,7 @@
             this.txtMaterial.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtMaterial.Properties.Appearance.Options.UseFont = true;
             this.txtMaterial.Size = new System.Drawing.Size(100, 26);
-            this.txtMaterial.TabIndex = 2;
+            this.txtMaterial.TabIndex = 7;
             // 
             // txtFabricType
             // 
@@ -445,7 +440,7 @@
             this.txtFabricType.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtFabricType.Properties.Appearance.Options.UseFont = true;
             this.txtFabricType.Size = new System.Drawing.Size(100, 26);
-            this.txtFabricType.TabIndex = 2;
+            this.txtFabricType.TabIndex = 6;
             // 
             // txtSize
             // 
@@ -454,7 +449,7 @@
             this.txtSize.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtSize.Properties.Appearance.Options.UseFont = true;
             this.txtSize.Size = new System.Drawing.Size(100, 26);
-            this.txtSize.TabIndex = 2;
+            this.txtSize.TabIndex = 3;
             // 
             // txtUsability
             // 
@@ -463,7 +458,7 @@
             this.txtUsability.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtUsability.Properties.Appearance.Options.UseFont = true;
             this.txtUsability.Size = new System.Drawing.Size(100, 26);
-            this.txtUsability.TabIndex = 2;
+            this.txtUsability.TabIndex = 5;
             // 
             // txtName
             // 
@@ -481,7 +476,16 @@
             this.txtColor.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtColor.Properties.Appearance.Options.UseFont = true;
             this.txtColor.Size = new System.Drawing.Size(100, 26);
-            this.txtColor.TabIndex = 2;
+            this.txtColor.TabIndex = 4;
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(122, 26);
+            this.txtID.Name = "txtID";
+            this.txtID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtID.Properties.Appearance.Options.UseFont = true;
+            this.txtID.Size = new System.Drawing.Size(100, 26);
+            this.txtID.TabIndex = 0;
             // 
             // txtBoxID
             // 
@@ -490,47 +494,47 @@
             this.txtBoxID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtBoxID.Properties.Appearance.Options.UseFont = true;
             this.txtBoxID.Size = new System.Drawing.Size(100, 26);
-            this.txtBoxID.TabIndex = 2;
+            this.txtBoxID.TabIndex = 1;
             // 
-            // labelControl8
+            // lblReason
             // 
-            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl8.Appearance.Options.UseFont = true;
-            this.labelControl8.Location = new System.Drawing.Point(41, 302);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(68, 19);
-            this.labelControl8.TabIndex = 0;
-            this.labelControl8.Text = "REASON:";
+            this.lblReason.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblReason.Appearance.Options.UseFont = true;
+            this.lblReason.Location = new System.Drawing.Point(41, 302);
+            this.lblReason.Name = "lblReason";
+            this.lblReason.Size = new System.Drawing.Size(68, 19);
+            this.lblReason.TabIndex = 0;
+            this.lblReason.Text = "REASON:";
             // 
-            // labelControl7
+            // lblMaterial
             // 
-            this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(26, 266);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(83, 19);
-            this.labelControl7.TabIndex = 0;
-            this.labelControl7.Text = "MATERIAL:";
+            this.lblMaterial.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblMaterial.Appearance.Options.UseFont = true;
+            this.lblMaterial.Location = new System.Drawing.Point(26, 266);
+            this.lblMaterial.Name = "lblMaterial";
+            this.lblMaterial.Size = new System.Drawing.Size(83, 19);
+            this.lblMaterial.TabIndex = 0;
+            this.lblMaterial.Text = "MATERIAL:";
             // 
-            // labelControl6
+            // lblFabricType
             // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(6, 230);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(103, 19);
-            this.labelControl6.TabIndex = 0;
-            this.labelControl6.Text = "FABRIC TYPE:";
+            this.lblFabricType.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblFabricType.Appearance.Options.UseFont = true;
+            this.lblFabricType.Location = new System.Drawing.Point(6, 230);
+            this.lblFabricType.Name = "lblFabricType";
+            this.lblFabricType.Size = new System.Drawing.Size(103, 19);
+            this.lblFabricType.TabIndex = 0;
+            this.lblFabricType.Text = "FABRIC TYPE:";
             // 
-            // labelControl3
+            // lblSize
             // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(69, 124);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(39, 19);
-            this.labelControl3.TabIndex = 0;
-            this.labelControl3.Text = "SİZE:";
+            this.lblSize.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblSize.Appearance.Options.UseFont = true;
+            this.lblSize.Location = new System.Drawing.Point(69, 124);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(39, 19);
+            this.lblSize.TabIndex = 0;
+            this.lblSize.Text = "SİZE:";
             // 
             // btnDelete
             // 
@@ -580,45 +584,55 @@
             this.btnExport.Text = "EXPORT";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // labelControl5
+            // lblUsability
             // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(25, 193);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(84, 19);
-            this.labelControl5.TabIndex = 0;
-            this.labelControl5.Text = "USEBILITY:";
+            this.lblUsability.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblUsability.Appearance.Options.UseFont = true;
+            this.lblUsability.Location = new System.Drawing.Point(25, 193);
+            this.lblUsability.Name = "lblUsability";
+            this.lblUsability.Size = new System.Drawing.Size(84, 19);
+            this.lblUsability.TabIndex = 0;
+            this.lblUsability.Text = "USEBILITY:";
             // 
-            // labelControl2
+            // lblName
             // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(59, 89);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(49, 19);
-            this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "NAME:";
+            this.lblName.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblName.Appearance.Options.UseFont = true;
+            this.lblName.Location = new System.Drawing.Point(59, 89);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(49, 19);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "NAME:";
             // 
-            // labelControl4
+            // lblId
             // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(50, 158);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(58, 19);
-            this.labelControl4.TabIndex = 0;
-            this.labelControl4.Text = "COLOR:";
+            this.lblId.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblId.Appearance.Options.UseFont = true;
+            this.lblId.Location = new System.Drawing.Point(85, 29);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(23, 19);
+            this.lblId.TabIndex = 0;
+            this.lblId.Text = "ID:";
             // 
-            // labelControl1
+            // lblColor
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(50, 59);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(58, 19);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "BOX ID:";
+            this.lblColor.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblColor.Appearance.Options.UseFont = true;
+            this.lblColor.Location = new System.Drawing.Point(50, 158);
+            this.lblColor.Name = "lblColor";
+            this.lblColor.Size = new System.Drawing.Size(58, 19);
+            this.lblColor.TabIndex = 0;
+            this.lblColor.Text = "COLOR:";
+            // 
+            // lblBoxId
+            // 
+            this.lblBoxId.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblBoxId.Appearance.Options.UseFont = true;
+            this.lblBoxId.Location = new System.Drawing.Point(50, 59);
+            this.lblBoxId.Name = "lblBoxId";
+            this.lblBoxId.Size = new System.Drawing.Size(58, 19);
+            this.lblBoxId.TabIndex = 0;
+            this.lblBoxId.Text = "BOX ID:";
             // 
             // barButtonItem4
             // 
@@ -645,24 +659,39 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
             // 
-            // labelControl9
+            // btnTshirt
             // 
-            this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(85, 29);
-            this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(23, 19);
-            this.labelControl9.TabIndex = 0;
-            this.labelControl9.Text = "ID:";
+            this.btnTshirt.Caption = "T-shirt";
+            this.btnTshirt.Id = 41;
+            this.btnTshirt.ImageOptions.Image = global::Graduation_Project1.Properties.Resources.tshirt;
+            this.btnTshirt.Name = "btnTshirt";
+            this.btnTshirt.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnTshirt.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTshirt_ItemClick);
             // 
-            // txtID
+            // barButtonItem1
             // 
-            this.txtID.Location = new System.Drawing.Point(122, 26);
-            this.txtID.Name = "txtID";
-            this.txtID.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtID.Properties.Appearance.Options.UseFont = true;
-            this.txtID.Size = new System.Drawing.Size(100, 26);
-            this.txtID.TabIndex = 2;
+            this.barButtonItem1.Caption = "Shirt";
+            this.barButtonItem1.Id = 42;
+            this.barButtonItem1.ImageOptions.Image = global::Graduation_Project1.Properties.Resources.gömlek;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Trouser";
+            this.barButtonItem2.Id = 43;
+            this.barButtonItem2.ImageOptions.Image = global::Graduation_Project1.Properties.Resources.panth3;
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Skirt";
+            this.barButtonItem3.Id = 44;
+            this.barButtonItem3.ImageOptions.Image = global::Graduation_Project1.Properties.Resources.etek;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ClothesForm
             // 
@@ -679,9 +708,9 @@
             this.Text = "ClothesForm";
             this.Load += new System.EventHandler(this.ClothesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit3)).EndInit();
@@ -696,10 +725,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtUsability.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBoxID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -717,7 +746,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblBoxId;
         private DevExpress.XtraBars.BarCheckItem checkTshirt;
         private DevExpress.XtraBars.BarCheckItem checkShirt;
         private DevExpress.XtraBars.BarCheckItem checkTrouser;
@@ -727,9 +756,7 @@
         private DevExpress.XtraBars.BarCheckItem checkShoes;
         private DevExpress.XtraBars.BarCheckItem checkBlanket;
         private DevExpress.XtraBars.BarCheckItem checkSweatPanth;
-        private DevExpress.XtraBars.BarEditItem cmbCity;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private DevExpress.XtraBars.BarEditItem cmbTown;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
         private DevExpress.XtraBars.BarButtonItem barBtnList;
         private DevExpress.XtraBars.BarButtonItem barBtnBoxPage;
@@ -743,17 +770,17 @@
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraEditors.TextEdit txtColor;
         private DevExpress.XtraEditors.TextEdit txtBoxID;
-        private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl lblReason;
+        private DevExpress.XtraEditors.LabelControl lblMaterial;
+        private DevExpress.XtraEditors.LabelControl lblFabricType;
+        private DevExpress.XtraEditors.LabelControl lblSize;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraEditors.SimpleButton btnAdd;
         private DevExpress.XtraEditors.SimpleButton btnExport;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl lblUsability;
+        private DevExpress.XtraEditors.LabelControl lblName;
+        private DevExpress.XtraEditors.LabelControl lblColor;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit1;
         private DevExpress.XtraBars.BarEditItem barEditItem3;
@@ -763,6 +790,10 @@
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.TextEdit txtID;
-        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.LabelControl lblId;
+        private DevExpress.XtraBars.BarButtonItem btnTshirt;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
     }
 }

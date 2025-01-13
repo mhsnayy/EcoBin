@@ -19,7 +19,7 @@ namespace Graduation_Project1
             InitializeComponent();
         }
         //tüm kullanıcıları listeleme methodu  (TAMAMLANDI)
-        void listDb(string query = "SELECT * FROM boxes1")
+        void listDb(string query = "SELECT * FROM admins")
         {
             using (var con = db.connection())
             {
@@ -35,49 +35,47 @@ namespace Graduation_Project1
         {
             listDb();
         }
-
+        //seçilen verinin textboxlarda gözükmesi
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             DataRow dr = gridView1.GetDataRow(gridView1.FocusedRowHandle);
-            txtUserID.Text = dr["ID"]?.ToString() ?? "";//bunu yunusla konuşacaz id yaparız
+            txtUserID.Text = dr["Id"]?.ToString() ?? "";
             txtUserName.Text = dr["username"]?.ToString() ?? "";
             txtUserPassword.Text = dr["password"]?.ToString() ?? "";
-            
-            var selectedValue = dr["is_superadmin"]?.ToString(); // Veritabanından "decision" sütunu
+            txtCity.Text = dr["city"]?.ToString()??"";
+            txtDistrict.Text = dr["district"]?.ToString() ?? "";
 
-            if (selectedValue == "Donation")
+
+            bool selectedValue = Convert.ToBoolean(dr["is_superadmin"]); // Veritabanından "is_superadmin" sütunu
+
+            if (selectedValue)//admin
             {
-                radioGroup1.SelectedIndex = 0; // admin
+                radioGroup1.SelectedIndex = 0; 
                 
             }
-            else if (selectedValue == "Recycle")
+            else //user
             {
-                radioGroup1.SelectedIndex = 1; // user seçili
+                radioGroup1.SelectedIndex = 2;
                 
             }
-            else
-            {
-                radioGroup1.SelectedIndex = -1; // hiçbir şey seçili değil
-                
-            }
+           
         }
         //kullanıcı ekleme
         private void btnAddUser_Click(object sender, EventArgs e)
-        {  //yunusla database düzeltilecek ıd kısmı için
-            string query = "INSERT INTO admins (ID, username, password, is_superadmin, city, district,) " +
-                  "VALUES (@ID, @username, @password, @is_superadmin, @city, @district)";//yunusla database düzeltilecek
+        {  
+            string query = "INSERT INTO admins (username, password, is_superadmin, city, district) " +
+               "VALUES (@username, @password, @is_superadmin, @city, @district)";
             using (var con = db.connection())
             {
                 using (var comAdd = new NpgsqlCommand(query, con))
                 {
-                    // Parametreleri ekle
-                    comAdd.Parameters.AddWithValue("@ID", txtUserID.Text);
+                    LoginForm frmlog = new LoginForm();
+                    bool isSuperAdmin = radioGroup1.SelectedIndex == 0; // 0 = Admin, 1 = User
                     comAdd.Parameters.AddWithValue("@username", txtUserName.Text);
                     comAdd.Parameters.AddWithValue("@password", txtUserPassword.Text);        
-                    comAdd.Parameters.AddWithValue("@city", txtCity.Text); // int değer
+                    comAdd.Parameters.AddWithValue("@city", txtCity.Text);
                     comAdd.Parameters.AddWithValue("@district", txtDistrict.Text);
-
-                    comAdd.Parameters.AddWithValue("@is_superadmin", );//buraya bakılacak
+                    comAdd.Parameters.AddWithValue("@is_superadmin", isSuperAdmin);
 
                     comAdd.ExecuteNonQuery();
                 }
@@ -88,35 +86,50 @@ namespace Graduation_Project1
         //kullanıcı düzenleme
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE admins SET ID = @ID username = @username, password = @password, is_superadmin = @is_superadmin, " +
-                "city=@city, district=@district";
-            using (var con = db.connection())
-            {
-                using (var comEdit = new NpgsqlCommand(query, con))
-                {
-                    // Parametreleri ekle
-                    comEdit.Parameters.AddWithValue("@ID", txtUserID.Text);
-                    comEdit.Parameters.AddWithValue("@username", txtUserName.Text);
-                    comEdit.Parameters.AddWithValue("@password", txtUserPassword.Text);
-                    comEdit.Parameters.AddWithValue("@city", txtCity.Text); // int değer
-                    comEdit.Parameters.AddWithValue("@district", txtDistrict.Text);
+           
+                string query = "UPDATE admins SET username = @username, password = @password, is_superadmin = @is_superadmin, " +
+                               "city = @city, district = @district WHERE \"Id\"= @ID";
+                string ids = txtUserID.Text.ToString();
+                int idint = int.Parse(ids);
 
-                    comEdit.Parameters.AddWithValue("@is_superadmin", );//buraya bakılacak admşn kısmını radio buttona alma
-                    comEdit.ExecuteNonQuery();
+
+                using (var con = db.connection())
+                {
+                    using (var comEdit = new NpgsqlCommand(query, con))
+                    {
+                        
+                        bool isSuperAdmin = radioGroup1.SelectedIndex == 0; // 0 = Admin, 1 = User
+                          // Parametreleri ekle
+                        comEdit.Parameters.AddWithValue("@ID",idint);
+                        comEdit.Parameters.AddWithValue("@username", txtUserName.Text);
+                        comEdit.Parameters.AddWithValue("@password", txtUserPassword.Text);
+                        comEdit.Parameters.AddWithValue("@city", txtCity.Text);
+                        comEdit.Parameters.AddWithValue("@district", txtDistrict.Text);
+
+                        // is_superadmin radio button kontrolünden alınacak
+                       
+                        comEdit.Parameters.AddWithValue("@is_superadmin", isSuperAdmin);
+
+                        // Sorguyu çalıştır
+                        comEdit.ExecuteNonQuery();
+                    }
                 }
-            }
-            MessageBox.Show("EDIT PROCESS SUCCESSFULL");
-            listDb();
+
+                MessageBox.Show("EDIT PROCESS SUCCESSFUL");
+                listDb(); // Veritabanını yenilemek için çağrılan metot
+            
+
         }
         //kullanıcı silme 
         private void btnDeleteUser_Click(object sender, EventArgs e)
         {
-            string query = "DELETE FROM admins where ID= @id";
+            string query = "DELETE FROM admins WHERE \"Id\" = @id";// id yi bu şekilde yazmazsak hata aldık
             using (var con = db.connection())
             {
                 using (var comDelete = new NpgsqlCommand(query, con))
                 {
-                    comDelete.Parameters.AddWithValue("@id", int.Parse(txtUserID.Text));
+                    int id = int.Parse(txtUserID.Text);
+                    comDelete.Parameters.AddWithValue("@id", id);
                     comDelete.ExecuteNonQuery();
                 }
             }
@@ -124,7 +137,10 @@ namespace Graduation_Project1
             listDb();
         }
 
-    
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
     
 }

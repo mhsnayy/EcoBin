@@ -92,12 +92,12 @@
             // 
             this.buttonLogin.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.buttonLogin.Appearance.Options.UseFont = true;
-            this.buttonLogin.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("sButtonLog.ImageOptions.SvgImage")));
+            this.buttonLogin.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("buttonLogin.ImageOptions.SvgImage")));
             this.buttonLogin.Location = new System.Drawing.Point(325, 444);
             this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(191, 46);
-            this.buttonLogin.TabIndex = 2;
+            this.buttonLogin.TabIndex = 3;
             this.buttonLogin.Text = "LOGIN";
             this.buttonLogin.Click += new System.EventHandler(this.sButtonLog_Click);
             // 
@@ -109,8 +109,9 @@
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtPassword.Properties.Appearance.Options.UseFont = true;
             this.txtPassword.Properties.ContextImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("txtPassword.Properties.ContextImageOptions.SvgImage")));
+            this.txtPassword.Properties.UseSystemPasswordChar = true;
             this.txtPassword.Size = new System.Drawing.Size(191, 36);
-            this.txtPassword.TabIndex = 1;
+            this.txtPassword.TabIndex = 2;
             // 
             // txtUserName
             // 
@@ -119,12 +120,13 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtUserName.Properties.Appearance.Options.UseFont = true;
-            this.txtUserName.Properties.ContextImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("txtUser.Properties.ContextImageOptions.SvgImage")));
+            this.txtUserName.Properties.ContextImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("txtUserName.Properties.ContextImageOptions.SvgImage")));
             this.txtUserName.Size = new System.Drawing.Size(191, 36);
-            this.txtUserName.TabIndex = 0;
+            this.txtUserName.TabIndex = 1;
             // 
             // LoginForm
             // 
+            this.AcceptButton = this.buttonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 821);

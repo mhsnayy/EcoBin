@@ -15,22 +15,23 @@ namespace Graduation_Project1
     public partial class BoxesForm : Form
     {
         DataBase db = new DataBase();
-        private string _city = "";//bu bilgiyi comboboxdan alacak
-        int boxCount = 0;
+        
         List<BarCheckItem> checkItems = new List<BarCheckItem>();
         List<string> boxes = new List<string>();
+        List<string> boxlist = new List<string>();
 
         public BoxesForm()
         {
             InitializeComponent();
         }
-        //form açılır açılmaz database listelenecek(TAMAMLANDI)
+        //form açılır açılmaz database listelenecek boxlar düzenlenecek(TAMAMLANDI)
         private void BoxesForm_Load(object sender, EventArgs e)
         {
             listDb();
+            showBoxes();
         }
         //default tüm databasei getiren bir sorgu(TAMAMLANDI)
-        void listDb(string query = "SELECT * FROM boxes1")
+        void listDb(string query = "SELECT * FROM clothes")
         {
             using (var con = db.connection())
             {
@@ -42,82 +43,94 @@ namespace Graduation_Project1
                 }
             }
         } 
-        //sadece databasede var olan kutuları gösteren bir method(TAMAMLANDI)(şehirleri kaldırabiliriz=sorgu değişir)
-        public void showBoxes()
+        //sadece databasede var olan kutuları gösteren bir method(TAMAMLANDI)
+        public void getBoxes()
         {
-            string query = "SELECT COUNT(*) AS box_count FROM boxes1 WHERE city = @p1 GROUP BY city ; ";//kaç farklı kutu idsi var onu hesaplayan bir query
+            string query = "SELECT box_id from box_info";
             using (var con = db.connection())
             {
                 using (NpgsqlCommand com = new NpgsqlCommand(query, con))
-                {
-                    com.Parameters.AddWithValue("@p1", _city);
-                    object result = com.ExecuteScalar();
-                    boxCount = Convert.ToInt16(result);
-                }
-            }
-            foreach (BarItem item in ribbonControl1.Items)
-            {
-                if (item is BarCheckItem checkItem)
-                {
-                    checkItems.Add(checkItem);
-                }
-            }
-            for (int i = 0; i <= boxCount; i++)
-            {
-                checkItems[i].Visibility = BarItemVisibility.Always;
-            }
-        }
-        //seçilen kutuların string toplamı(TAMAMLANDI)
-        public string sumBoxes()
-        {
-            string sum = "";
-            foreach (var box in boxes)
-            {
-                sum = sum + box + ",";
-            }
-            if (sum.EndsWith(","))
-            {
-                sum.Remove(sum.Length - 1);
-            }
-            sum = "(" + sum + ")";
-            return sum;
-        }
-        //chartlar gösterilecek
-        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            string query = @"
-        SELECT
-            clothes_type AS kiyafet_turu,
-            COUNT(*) AS toplam_adet
-        FROM
-            clothes
-        GROUP BY
-            clothes_type
-        ORDER BY
-            toplam_adet DESC;
-    ";
-            using (var con = db.connection())
-            {
-                using (NpgsqlCommand com = new NpgsqlCommand(query, con))
-                {
-                    NpgsqlDataReader dataReader = com.ExecuteReader();
-                    chartControl1.Series.Clear();
-                    while (dataReader.Read())
+                {                
+                    
+                   using (var reader = com.ExecuteReader())
                     {
-                        chartControl1.Series["Series 1"].Points.AddPoint(Convert.ToString(dataReader[0]), int.Parse(dataReader[1].ToString()));
-                        chartControl2.Series["Series 1"].Points.AddPoint(Convert.ToString(dataReader[0]), int.Parse(dataReader[1].ToString()));
+                        while (reader.Read())
+                        {
+                            boxlist.Add(reader.GetString(0)); //dbdedeki box isimleri listeye eklenir
+                        }
                     }
                 }
             }
-            
+        }        
+        public void showBoxes()
+        {
+            getBoxes();
+            // RibbonPageGroup içindeki tüm ItemLinks öğelerini kontrol et
+            foreach (DevExpress.XtraBars.BarItemLink itemLink in ribbonPageGroup1.ItemLinks)
+            {
+                // BarItem öğesine erişim
+                var barItem = itemLink.Item;
+
+                if (barItem != null)
+                {
+                    // Eğer BarItem'in Caption'ı veritabanındaki boxlist'te varsa görünür yap, yoksa gizle
+                    barItem.Visibility = boxlist.Contains(barItem.Caption)
+                        ? DevExpress.XtraBars.BarItemVisibility.Always 
+                        : DevExpress.XtraBars.BarItemVisibility.Never; 
+                }
+            }
+        }
+
+        //chartlar gösterilecek
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                string selectedBox = string.Join(",", boxes);
+                selectedBox = selectedBox.Replace("'", "");
+                string query = "SELECT name,COUNT(*) FROM " + selectedBox + " GROUP BY name";
+                using (var con = db.connection())
+                {
+                    using (NpgsqlCommand com = new NpgsqlCommand(query, con))
+                    {
+                        NpgsqlDataReader dataReader = com.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            chartControl1.Series["Clothes"].Points.AddPoint(Convert.ToString(dataReader[0]), int.Parse(dataReader[1].ToString()));
+                            chartControl2.Series["Series 1"].Points.AddPoint(Convert.ToString(dataReader[0]), int.Parse(dataReader[1].ToString()));
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("tek kutu sorgusu yapabilirsiniz");
+            }
             
         }
         //seçilen boxlara göre listeleme (TAMAMLANDI)
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string sum_boxes = sumBoxes();
-            string query = "SELECT * FROM boxes1 WHERE box_id IN" + sumBoxes();//tamamlanacak
-            listDb(query);
+            if (boxes.Count == 0)
+            {
+                listDb();
+            }
+            else
+            {
+                string selectedBox = string.Join(",", boxes);
+                string query = "SELECT * FROM clothes WHERE box_id IN (" + selectedBox + ")";
+                try
+                {
+                    listDb(query);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("seçimlerinize göre ürün bulunamadı");
+                }
+            }
         }
         //xlsx çıktısı alma (TAMAMLANDI)
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -137,13 +150,16 @@ namespace Graduation_Project1
         //delete box (TAMAMLANDI)
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string query = "DELETE FROM boxes1 where box_id in @id";
-            string sum_boxes = sumBoxes();
+            string selectedBox = string.Join(",", boxes);
+            selectedBox=selectedBox.Replace("'", "");
+
+            string query = "DELETE FROM "+selectedBox;
+            
             using (var con = db.connection())
             {
                 using (var comDelete = new NpgsqlCommand(query, con))
                 {
-                    comDelete.Parameters.AddWithValue("@id",sum_boxes);
+                    
                     comDelete.ExecuteNonQuery();
                 }
             }
@@ -165,12 +181,12 @@ namespace Graduation_Project1
             this.Hide();
         }
 
-        
+
         //box1
-        private void barBox1_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barBox1_CheckedChanged(object sender, ItemClickEventArgs e)
         {
-            string box = "'box1'";//yunusla database düzeltmemiz gerekebilir
-            if (barBox1.Checked==true)
+            string box = "'box1'";
+            if (barBox1.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -183,7 +199,7 @@ namespace Graduation_Project1
         private void barBox2_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box2'";
-            if (barBox1.Checked == true)
+            if (barBox2.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -196,7 +212,7 @@ namespace Graduation_Project1
         private void barBox3_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box3'";
-            if (barBox1.Checked == true)
+            if (barBox3.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -209,7 +225,7 @@ namespace Graduation_Project1
         private void barBox4_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box4'";
-            if (barBox1.Checked == true)
+            if (barBox4.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -222,7 +238,7 @@ namespace Graduation_Project1
         private void barBox5_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box5'";
-            if (barBox1.Checked == true)
+            if (barBox5.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -236,7 +252,7 @@ namespace Graduation_Project1
         private void barBox6_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box6'";
-            if (barBox1.Checked == true)
+            if (barBox6.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -249,7 +265,7 @@ namespace Graduation_Project1
         private void barBox7_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box7'";
-            if (barBox1.Checked == true)
+            if (barBox7.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -262,7 +278,7 @@ namespace Graduation_Project1
         private void barBox8_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box8'";
-            if (barBox1.Checked == true)
+            if (barBox8.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -275,7 +291,7 @@ namespace Graduation_Project1
         private void barBox9_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box9'";
-            if (barBox1.Checked == true)
+            if (barBox9.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -288,7 +304,7 @@ namespace Graduation_Project1
         private void barBox10_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string box = "'box10'";
-            if (barBox1.Checked == true)
+            if (barBox10.Checked == true)
             {
                 boxes.Add(box);
             }
@@ -297,5 +313,7 @@ namespace Graduation_Project1
                 boxes.Remove(box);
             }
         }
+
+        
     }
 }

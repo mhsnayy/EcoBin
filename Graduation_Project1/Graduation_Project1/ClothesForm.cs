@@ -20,24 +20,9 @@ namespace Graduation_Project1
         }
         DataBase db = new DataBase();
         List<string> clothes = new List<string>();
-        // kıyafet listesindeki kıyafetlerin string toplamı (TAMAMLANDI)
-        string sumClothes(List<string> clist)
-        {
-            string sum = "";
-            foreach (var i in clist)
-            {
-
-                sum = sum + i + ",";
-            }
-            if (sum.EndsWith(","))
-            {
-                sum = sum.Remove(sum.Length - 1);
-            }
-            sum = "(" + sum + ")";
-            return sum;
-        }
+        
         //tüm ürünleri listeleme methodu  (TAMAMLANDI)
-        void listDb(string query = "SELECT * FROM boxes1")
+        void listDb(string query = "SELECT * FROM clothes")
         {
             using (var con = db.connection())
             {
@@ -59,7 +44,8 @@ namespace Graduation_Project1
         //add product to database  (TAMAMLANDI)
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO boxes1 (box_id, name, size, color, usability, fabric_type, reason, material) " +
+            string selectBox = txtBoxID.Text.ToString();
+            string query = "INSERT INTO "+selectBox+" (box_id, name, size, color, usability, fabric_type, reason, material) " +
                   "VALUES (@box_id, @name, @size, @color, @usability, @fabric_type, @reason, @material)";
             using (var con = db.connection())
             {
@@ -81,15 +67,17 @@ namespace Graduation_Project1
             listDb();
         }
 
-        //delete product****eksik var box ıdden alırsak hangi ürün silinecek...ürün idsi olmalı (ONUN DIŞINDA TAMAMLANDI)
+        //delete product
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string query = "DELETE FROM boxes1 where ID= @id";
+            string selectBox = txtBoxID.Text.ToString();
+            string query = "DELETE FROM "+selectBox+"  where \"Id\"=@id";
             using (var con = db.connection())
             {
                 using (var comDelete = new NpgsqlCommand(query, con))
                 {
-                    comDelete.Parameters.AddWithValue("@id", int.Parse(txtBoxID.Text));
+                    int id = int.Parse(txtID.Text);
+                    comDelete.Parameters.AddWithValue("@id",id );
                     comDelete.ExecuteNonQuery();
                 }
             }
@@ -100,8 +88,18 @@ namespace Graduation_Project1
         //datagriddeki verileri textboxda okumak (TAMAMLANDI)
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            txtID.Text = "";
+            txtBoxID.Text = "";
+            txtName.Text = "";
+            txtSize.Text = "";
+            txtColor.Text = "";
+            txtUsability.Text = "";
+            txtFabricType.Text = "";
+            txtMaterial.Text = "";
+            txtReason.Text = "";
+            var selectedValue = "reycle";
             DataRow dr = gridView1.GetDataRow(gridView1.FocusedRowHandle);
-            txtID.Text = dr["id"]?.ToString() ?? "";
+            txtID.Text = dr["Id"]?.ToString() ?? "";
             txtBoxID.Text = dr["box_id"]?.ToString() ?? "";
             txtName.Text = dr["name"]?.ToString() ?? "";
             txtSize.Text = dr["size"]?.ToString() ?? "";
@@ -110,23 +108,17 @@ namespace Graduation_Project1
             txtFabricType.Text = dr["fabric_type"]?.ToString() ?? "";
             txtMaterial.Text = dr["material"]?.ToString() ?? "";
             txtReason.Text = dr["reason"]?.ToString() ?? "";
-            var selectedValue = dr["decision"]?.ToString(); // Veritabanından "decision" sütunu
+            selectedValue = dr["decision"]?.ToString(); // Veritabanından "decision" sütunu
 
-            if (selectedValue == "Donation")
+            if (selectedValue == "reycle") // Recycle seçili
             {
-                radioGroup1.SelectedIndex = 0; // Donation seçili
-                txtReason.Visible = true;
+                radioGroup1.SelectedIndex = 1;
             }
-            else if (selectedValue == "Recycle")
+            else // Donation seçili
             {
-                radioGroup1.SelectedIndex = 1; // Recycle seçili
-                txtReason.Visible = false;
+                radioGroup1.SelectedIndex = 0;                 
             }
-            else
-            {
-                radioGroup1.SelectedIndex = -1; // Hiçbir şey seçili değil
-                txtReason.Visible = false;
-            }
+            
         }
         // xlxs çıktısı alma (TAMAMLANDI)
         private void btnExport_Click(object sender, EventArgs e)
@@ -143,23 +135,36 @@ namespace Graduation_Project1
                 }
             }
         }
+        string choosen;
         //ürün içerik güncelleme (TAMAMLANDI)
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE boxes1 SET box_id = @box_id name = @name, size = @size, color = @color, usability = @usability," +
-                "fabric_type = @fabric_type, reason = @reason, material = @material WHERE box_id = @box_id";
+            string selectBox = txtBoxID.Text.ToString();
+            string query = "UPDATE "+selectBox+" SET box_id = @box_id, name = @name, size = @size, color = @color, usability = @usability," +
+                "fabric_type = @fabric_type, reason = @reason, material = @material WHERE \"Id\" = @id";
             using (var con = db.connection())
-            {
+            {              
+                if (radioGroup1.SelectedIndex == 0)
+                {
+                    choosen = "Donation";// Donation seçili
+                }
+                else if (radioGroup1.SelectedIndex == 1)
+                {
+                    choosen = "Recycle";// Recycle seçili
+                }
                 using (var comEdit = new NpgsqlCommand(query, con))
                 {
-                    comEdit.Parameters.AddWithValue("box_id", txtBoxID.Text.ToString());
+                    
+                    comEdit.Parameters.AddWithValue("@id", int.Parse(txtID.Text));//int değer
+                    comEdit.Parameters.AddWithValue("@box_id", txtBoxID.Text.ToString());
                     comEdit.Parameters.AddWithValue("@name", txtName.Text.ToString());
                     comEdit.Parameters.AddWithValue("@size", txtSize.Text.ToString());
                     comEdit.Parameters.AddWithValue("@color", txtColor.Text.ToString());
-                    comEdit.Parameters.AddWithValue("@usability", txtUsability.Text.ToString());
+                    comEdit.Parameters.AddWithValue("@usability", int.Parse(txtUsability.Text));//int değer
                     comEdit.Parameters.AddWithValue("@fabric_type", txtFabricType.Text.ToString());
                     comEdit.Parameters.AddWithValue("@reason", txtReason.Text.ToString());
                     comEdit.Parameters.AddWithValue("@material", txtMaterial.Text.ToString());
+                    comEdit.Parameters.AddWithValue("@decision", choosen.ToString());
                     comEdit.ExecuteNonQuery();
                 }
             }
@@ -169,14 +174,28 @@ namespace Graduation_Project1
         //seçilen kıyafetlere göre listeleme (TAMAMLANDI)
         private void barBtnList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string sum_clothes = sumClothes(clothes);
-            string query = "SELECT * FROM boxes1 WHERE name IN" + sum_clothes;
-            listDb(query);
-
+            if (clothes.Count == 0) 
+            {
+                listDb();
+            }
+            else
+            {
+                string selectedClothes = string.Join(",", clothes);
+                string query = "SELECT * FROM clothes WHERE name IN (" + selectedClothes + ")";
+                string a = query;
+                try
+                {
+                    listDb(query);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("seçimlerinize göre ürün bulunamadı");
+                }
+            }          
         }
         private void checkTshirt_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string cl = "'tshirt'";
+            string cl = "'t-shirt'";
             if (checkTshirt.Checked == true)
             {
                 clothes.Add(cl);
@@ -188,8 +207,8 @@ namespace Graduation_Project1
         }
         private void checkShirt_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string cl = "'shirt'";
-            if (checkTshirt.Checked == true)
+            string cl = "'Shirts'";
+            if (checkShirt.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -201,7 +220,7 @@ namespace Graduation_Project1
         private void checkTrouser_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'trouser'";
-            if (checkTshirt.Checked == true)
+            if (checkTrouser.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -212,8 +231,8 @@ namespace Graduation_Project1
         }
         private void checkSkirt_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string cl = "'skirt'";
-            if (checkTshirt.Checked == true)
+            string cl = "'Skirts'";
+            if (checkSkirt.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -225,7 +244,7 @@ namespace Graduation_Project1
         private void checkSweater_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'sweater'";
-            if (checkTshirt.Checked == true)
+            if (checkSweater.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -237,7 +256,7 @@ namespace Graduation_Project1
         private void checkCoat_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'coat'";
-            if (checkTshirt.Checked == true)
+            if (checkCoat.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -249,7 +268,7 @@ namespace Graduation_Project1
         private void checkShoes_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'shoes'";
-            if (checkTshirt.Checked == true)
+            if (checkShoes.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -261,7 +280,7 @@ namespace Graduation_Project1
         private void checkBlanket_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'blanket'";
-            if (checkTshirt.Checked == true)
+            if (checkBlanket.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -273,7 +292,7 @@ namespace Graduation_Project1
         private void checkSweatPanth_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string cl = "'sweatpanth'";
-            if (checkTshirt.Checked == true)
+            if (checkSweatPanth.Checked == true)
             {
                 clothes.Add(cl);
             }
@@ -281,6 +300,75 @@ namespace Graduation_Project1
             {
                 clothes.Remove(cl);
             }
+        }
+
+        private void barBtnBoxPage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BoxesForm bfrm = new BoxesForm();
+            bfrm.Show();
+            this.Hide();
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (radioGroup1.SelectedIndex == 1)//reycyle seçili
+            {
+                txtFabricType.Visible = true;
+                lblFabricType.Visible = true;
+                txtMaterial.Visible = false;
+                lblMaterial.Visible = false;
+                txtReason.Visible = true;
+                lblReason.Visible = true;
+                txtSize.Visible = false;
+                lblSize.Visible = false;
+                txtColor.Visible = false;
+                lblColor.Visible = false;
+                txtUsability.Visible = false;
+                lblUsability.Visible = false;
+            }
+            else//donation seçili
+            {
+                txtReason.Visible = false;
+                lblReason.Visible = false;
+                txtSize.Visible = true;
+                lblSize.Visible = true;
+                txtColor.Visible = true;
+                lblColor.Visible = true;
+                txtUsability.Visible = true;
+                lblUsability.Visible = true;
+                txtFabricType.Visible = false;
+                lblFabricType.Visible = false;
+                txtMaterial.Visible = false;
+                lblMaterial.Visible = false;
+            }
+        }
+
+        private void btnTshirt_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string query = "SELECT * FROM clothes WHERE name IN ('t-shirt')";
+            listDb(query);
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                string query = "SELECT * FROM clothes WHERE name IN ('shirt')";
+                listDb(query);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("böyle bir ürün yok");
+            }
+            
+        }
+
+        private void barBtnHomePage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HomeForm hfrm = new HomeForm();
+            hfrm.Show();
+            this.Hide();
         }
     }
 }
