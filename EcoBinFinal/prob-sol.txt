@@ -1,0 +1,36 @@
+PROB:	şehir ve ilçe seçtikçe kutuların sayısının belirlenmesi
+
+SOL:	2 kez SQL sorgu yapılır biri login ekranında birisi de şehir değişimi yapılırken. SQL sorguda count kullanılıp kaç tane box olduğu
+	bulunur ardından bu bir değişkene atanır. mesela sorgu sonunda 6 tane box varsa döngüyle en son 6. box gösterilene kadar boxlar 
+	gösterilir.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+PROB:	kıyafetleri checkboxla seçmek SQL sorgusuna nasıl aktarılır?
+
+SOL:	her bir checkboxın kendine ait bool değişkeni olur. global alanda bir adet List<string> tanımlanır. ekleme işlemi için bir method
+	tanımlarız. bu methodun başında listenin boş olması lazım. onu da listenin başında bir döngüyle halledebiliriz. iflerle bu bool
+	değişkenini kontrol edip true olduğunda listeye butona göre kıyafet ekleyen bir method tanımlanır. daha sonra bu listedeki 
+	stringleri tek tek yan yana yazdıran bir döngü lazım. uzun bir string elde ederiz. bunu da SQL sorgumuzdaki parametre kısmına 
+	göndeririz.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+reason sadece recycleda gözükecek
+
+attributelar read only olacak 
+**********************************************************************
+
+kullanıcı bilgilerini edit butotonunda sıkıntı.
+databasedeki columlar mesela ID gibi olanlar düzenlenecek
+delete var add var boxlardakiler düzenelecek checked itemler buttona çevirilebilir.
+edit user a home page buttonu ekle 
+home pageleri hepsine de ekle 
+grafiklere bir daha bak olmamış orası 
+
+clothes tablosunda silinmiş gözükmüyır ama box box bakınca silinmiş clothesa bakmak lazım
+
+
+boxe1 lerin hepsi box 1 olacak ya da 2 ama kıyafet sayfasında clothes olacak
+kıyatleri tek tek listelemede sorun var 
+
+
