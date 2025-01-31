@@ -38,16 +38,3 @@ EcoClothBin, şehirlerdeki kıyafet bağış süreçlerini dijitalleştirmek ve 
 ### Gereksinimler:  
 - Visual Studio 2017 ve Devexpress kurulu olmalıdır.
 - PostgreSQL veritabanı erişimi gereklidir.  
-
-### Kurulum Adımları:  
-1. Depoyu klonlayın:  
-   bash
-   git clone https://github.com/01YunusKaratas/GraduationProject.git
-   cd GraduationProject
-2. Gerekli bağımlılıkları yükleyin:
-   bash
-   npm install
-3. Veritabanını yapılandırın (.env dosyanızı oluşturun ve gerekli bilgileri girin)
-4. Sunucuyu başlatın:
-   ```bash
-   node index.js
